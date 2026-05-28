@@ -10,7 +10,7 @@
                     <div>
                         <span class="meta-chip mb-3"><i class="fa-solid fa-right-to-bracket"></i> Login</span>
                         <h1 class="display-6 fw-bold mb-3">Volte para sua biblioteca.</h1>
-                        <p class="mb-0 opacity-75">Entre e continue sua colecao.</p>
+                        <p class="mb-0 opacity-75">Entre e continue sua coleção.</p>
                     </div>
 
                     <div class="mt-4">
@@ -47,13 +47,13 @@
                         <div class="col-12">
                             <div class="form-check">
                                 <input class="form-check-input" id="remember" name="remember" type="checkbox" value="1" {{ old('remember') ? 'checked' : '' }}>
-                                <label class="form-check-label" for="remember">Manter conectado</label>
+                                <label class="form-check-label" for="remember">Manter-se conectado</label>
                             </div>
                         </div>
 
                         <div class="col-12 d-flex flex-wrap gap-3 align-items-center">
                             <button class="btn btn-brand px-4" type="submit">Entrar</button>
-                            <span class="text-secondary">Nao possui conta? <a href="{{ route('register') }}">Criar agora</a></span>
+                            <span class="text-secondary">Não possui conta? <a href="{{ route('register') }}">Criar agora</a></span>
                         </div>
                     </form>
                 </div>
