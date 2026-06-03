@@ -104,4 +104,96 @@
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror
     </div>
+
+        <div class="col-12 col-xl-6">
+            <label class="form-label fw-semibold">Imagem de capa</label>
+
+            <div class="row g-2">
+                <div class="col-12">
+                    <label class="form-label" for="imagem_arquivo">
+                        <small class="text-muted">Selecionar arquivo local</small>
+                    </label>
+                    <input class="form-control @error('imagem_arquivo') is-invalid @enderror" id="imagem_arquivo" name="imagem_arquivo" type="file" accept="image/jpeg,image/png,image/webp,image/gif">
+                    @error('imagem_arquivo')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label" for="imagem_url">
+                        <small class="text-muted">Ou informar URL de imagem</small>
+                    </label>
+                    <input class="form-control @error('imagem_url') is-invalid @enderror" id="imagem_url" name="imagem_url" type="url" placeholder="https://exemplo.com/capa.jpg" value="{{ old('imagem_url', $jogo->imagem_url ?? '') }}">
+                    @error('imagem_url')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <div id="imagem_preview_container" class="border rounded overflow-hidden mt-3" style="max-width: 280px; max-height: 400px; display: {{ old('imagem_url', $jogo->imagem_url ?? '') ? 'flex' : 'none' }}; align-items: center; justify-content: center; background-color: #f8f9fa;">
+                <img id="imagem_preview" src="{{ old('imagem_url', $jogo->imagem_url ?? '') }}" alt="Imagem de capa" class="img-fluid" style="object-fit: cover; width: 100%; height: 100%;">
+            </div>
+            <div id="imagem_preview_message" class="text-secondary small mt-3" style="display: {{ old('imagem_url', $jogo->imagem_url ?? '') ? 'none' : 'block' }};">📸 A miniatura será exibida aqui quando você selecionar um arquivo ou informar uma URL.</div>
+        </div>
+    </div>
+
+    @push('scripts')
+        <script>
+            (() => {
+                const imagemArquivoInput = document.querySelector('#imagem_arquivo');
+                const imagemUrlInput = document.querySelector('#imagem_url');
+                const previewContainer = document.querySelector('#imagem_preview_container');
+                const previewImage = document.querySelector('#imagem_preview');
+                const previewMessage = document.querySelector('#imagem_preview_message');
+
+                const updatePreview = (url) => {
+                    if (! url) {
+                        previewContainer.style.display = 'none';
+                        previewMessage.style.display = 'block';
+                        previewImage.removeAttribute('src');
+                        return;
+                    }
+
+                    previewImage.src = url;
+                    previewImage.onerror = () => {
+                        previewContainer.style.display = 'none';
+                        previewMessage.style.display = 'block';
+                    };
+                    previewContainer.style.display = 'flex';
+                    previewMessage.style.display = 'none';
+                };
+
+                // Handle file input
+                if (imagemArquivoInput) {
+                    imagemArquivoInput.addEventListener('change', (event) => {
+                        const file = event.target.files?.[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                updatePreview(e.target.result);
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            updatePreview(imagemUrlInput?.value.trim() || '');
+                        }
+                    });
+                }
+
+                // Handle URL input
+                if (imagemUrlInput) {
+                    imagemUrlInput.addEventListener('input', (event) => {
+                        // Only update if no file is selected
+                        if (!imagemArquivoInput || !imagemArquivoInput.files?.length) {
+                            updatePreview(event.target.value.trim());
+                        }
+                    });
+
+                    // Update preview if URL already exists on page load
+                    if (imagemUrlInput.value && (!imagemArquivoInput || !imagemArquivoInput.files?.length)) {
+                        updatePreview(imagemUrlInput.value);
+                    }
+                }
+            })();
+        </script>
+    @endpush
 </div>

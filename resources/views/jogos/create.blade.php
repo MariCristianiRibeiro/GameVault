@@ -14,7 +14,7 @@
                     <a class="btn btn-soft" href="{{ route('jogos.index') }}">Voltar</a>
                 </div>
 
-                <form method="POST" action="{{ route('jogos.store') }}">
+                <form method="POST" action="{{ route('jogos.store') }}" enctype="multipart/form-data">
                     @csrf
                     @include('jogos._form')
 

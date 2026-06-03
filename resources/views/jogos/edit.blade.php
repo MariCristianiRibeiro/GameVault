@@ -14,7 +14,7 @@
                     <a class="btn btn-soft" href="{{ route('jogos.index') }}">Voltar</a>
                 </div>
 
-                <form method="POST" action="{{ route('jogos.update', $jogo->route_key) }}">
+                <form method="POST" action="{{ route('jogos.update', $jogo->route_key) }}" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     @include('jogos._form')

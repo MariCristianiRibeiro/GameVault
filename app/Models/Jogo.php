@@ -32,6 +32,7 @@ class Jogo extends Model
         'genero_id',
         'desenvolvedora_id',
         'user_id',
+        'imagem_url',
     ];
 
     protected function casts(): array

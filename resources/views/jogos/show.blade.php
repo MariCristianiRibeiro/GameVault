@@ -41,6 +41,11 @@
 
         <div class="col-lg-4">
             <div class="panel-card">
+                @if($jogo->imagem_url)
+                    <div class="mb-3 text-center">
+                        <img src="{{ $jogo->imagem_url }}" alt="Capa de {{ $jogo->titulo }}" class="img-fluid rounded" style="max-height:400px; width:auto;">
+                    </div>
+                @endif
                 <h2 class="section-title mb-4">Informações adicionais</h2>
                 <dl class="detail-list mb-0">
                     <dt>Horas jogadas</dt>

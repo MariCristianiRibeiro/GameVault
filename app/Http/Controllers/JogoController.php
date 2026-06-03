@@ -8,6 +8,7 @@ use App\Models\Jogo;
 use App\Models\Plataforma;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
@@ -44,6 +45,10 @@ class JogoController extends Controller
         $dados['user_id'] = $request->user()->id;
         $dados['horas_jogadas'] = $dados['horas_jogadas'] ?? 0;
 
+        if ($request->hasFile('imagem_arquivo')) {
+            $dados['imagem_url'] = $this->salvarImagemDoArquivo($request->file('imagem_arquivo'));
+        }
+
         Jogo::create($dados);
 
         return redirect()->route('jogos.index')->with('success', 'Jogo cadastrado com sucesso.');
@@ -71,6 +76,14 @@ class JogoController extends Controller
         $jogoModel = $this->buscarJogoDoUsuario($request, $jogo);
         $dados = $this->validar($request);
         $dados['horas_jogadas'] = $dados['horas_jogadas'] ?? 0;
+
+        if ($request->hasFile('imagem_arquivo')) {
+            if ($jogoModel->imagem_url && str_contains($jogoModel->imagem_url, '/storage/jogos/')) {
+                $oldPath = str_replace('/storage/jogos/', '', $jogoModel->imagem_url);
+                Storage::disk('public')->delete('jogos/' . $oldPath);
+            }
+            $dados['imagem_url'] = $this->salvarImagemDoArquivo($request->file('imagem_arquivo'));
+        }
 
         $jogoModel->update($dados);
 
@@ -107,6 +120,8 @@ class JogoController extends Controller
             'plataforma_id' => ['required', 'exists:plataformas,id'],
             'genero_id' => ['required', 'exists:generos,id'],
             'desenvolvedora_id' => ['required', 'exists:desenvolvedoras,id'],
+            'imagem_url' => ['nullable', 'url', 'max:500'],
+            'imagem_arquivo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,webp,gif', 'max:5120'],
         ], [
             'titulo.required' => 'Informe o titulo do jogo.',
             'horas_jogadas.integer' => 'As horas jogadas devem ser um numero inteiro.',
@@ -117,7 +132,24 @@ class JogoController extends Controller
             'plataforma_id.required' => 'Selecione uma plataforma.',
             'genero_id.required' => 'Selecione um genero.',
             'desenvolvedora_id.required' => 'Selecione uma desenvolvedora.',
+            'imagem_url.url' => 'Informe uma URL válida para a capa do jogo.',
+            'imagem_url.max' => 'A URL da imagem é muito longa.',
+            'imagem_arquivo.image' => 'O arquivo deve ser uma imagem válida.',
+            'imagem_arquivo.mimes' => 'A imagem deve estar em formato JPEG, PNG, WebP ou GIF.',
+            'imagem_arquivo.max' => 'A imagem não pode ter mais de 5MB.',
         ]);
+    }
+
+    private function salvarImagemDoArquivo($arquivo): ?string
+    {
+        if (! $arquivo) {
+            return null;
+        }
+
+        $filename = 'capa_' . time() . '_' . uniqid() . '.' . $arquivo->getClientOriginalExtension();
+        Storage::disk('public')->putFileAs('jogos', $arquivo, $filename);
+
+        return '/storage/jogos/' . $filename;
     }
 
     private function filtros(Request $request): array
