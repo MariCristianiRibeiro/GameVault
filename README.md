@@ -9,6 +9,7 @@
 
 **GameVault** é uma aplicação web desenvolvida em **Laravel 12** que permite aos usuários gerenciar sua biblioteca pessoal de videogames. A plataforma funciona como um catálogo privado onde você pode registrar todos os jogos que possui, acompanhar o progresso de conclusão, organizar por categorias e manter informações detalhadas sobre cada título.
 
+ 
 ## ✨ Funcionalidades Principais
 
 ### 👤 Autenticação e Segurança
@@ -284,41 +285,6 @@ GameVault/
 - **Acessível**: HTML semântico, labels, contraste adequado
 - **Intuitivo**: Fluxos simples e diretos
 - **Performance**: Assets otimizados com Vite
-
----
-
-## 📞 Suporte e Contribuição
-
-### Reportar Bugs
-Abra uma [issue no GitHub](https://github.com/Involute42/Projeto-GameVault/issues) com:
-- Descrição do problema
-- Passos para reproduzir
-- Versão PHP/Laravel
-- Screenshot se aplicável
-
-### Contribuir
-1. Fork o repositório
-2. Crie uma branch (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Add MinhaFeature'`)
-4. Push para a branch (`git push origin feature/MinhaFeature`)
-5. Abra um Pull Request
-
----
-
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para detalhes.
-
----
-
-## 🙏 Créditos
-
-- **Framework**: [Laravel](https://laravel.com)
-- **UI Framework**: [Tailwind CSS](https://tailwindcss.com)
-- **Interatividade**: [Alpine.js](https://alpinejs.dev)
-- **Build Tool**: [Vite](https://vitejs.dev)
-
----
 
 ## 🎮 Versão Atual
 
