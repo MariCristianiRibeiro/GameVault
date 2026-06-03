@@ -1,4 +1,4 @@
-# 🎮 GameVault - Seu Gerenciador Pessoal de Jogos
+# 🎮 GameVault
 
 ![Laravel](https://img.shields.io/badge/Laravel-12.5.0-%23FF2D20?logo=laravel)
 ![PHP](https://img.shields.io/badge/PHP-8.2-%23777BB4?logo=php)
@@ -8,14 +8,6 @@
 ## 📋 Descrição do Projeto
 
 **GameVault** é uma aplicação web desenvolvida em **Laravel 12** que permite aos usuários gerenciar sua biblioteca pessoal de videogames. A plataforma funciona como um catálogo privado onde você pode registrar todos os jogos que possui, acompanhar o progresso de conclusão, organizar por categorias e manter informações detalhadas sobre cada título.
-
-É perfeito para:
-- 🎯 Colecionadores de games que querem organizar sua biblioteca
-- 📊 Gamers que desejam rastrear o progresso e anotações pessoais
-- 🗂️ Usuários que gostam de organizar games por plataforma, gênero e desenvolvedora
-- 📸 Pessoas que querem armazenar capas de jogo com imagens locais ou URLs
-
----
 
 ## ✨ Funcionalidades Principais
 
@@ -343,18 +335,3 @@ Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para d
 - ✅ Dashboard
 - ✅ Validação de dados
 - ✅ Interface responsiva
-
-### 🚀 Futuras Melhorias Possíveis
-- Compartilhamento de biblioteca com amigos
-- Sistema de reviews/comentários
-- Estatísticas avançadas
-- Integração com APIs de games
-- Sistema de badges/achievements
-- Backup automático
-- Sincronização em nuvem
-
----
-
-**Desenvolvido com ❤️ usando Laravel e Tailwind CSS**
-
-Para mais informações, acesse: https://github.com/Involute42/Projeto-GameVault
