@@ -1,59 +1,127 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# GameVault
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sua biblioteca pessoal de jogos em um só lugar.
 
-## About Laravel
+## O que é GameVault?
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+GameVault é uma aplicação web para você organizar, acompanhar e gerenciar sua coleção de jogos de forma fácil e intuitiva. Se você é gamer e quer ter um controle melhor sobre seus títulos, plataformas e progresso — esse é o projeto certo para você.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Funcionalidades principais
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Cadastro e Gerenciamento de Jogos**: Adicione seus jogos favoritos com título, gênero, plataforma e desenvolvedora
+- **Organização por Status**: Controle quais jogos você está jogando, quer jogar (backlog) ou já finalizou
+- **Filtros e Busca**: Encontre rapidamente qualquer jogo na sua coleção usando filtros inteligentes
+- **Categorias**: Organize seus jogos por:
+  - **Gênero** (RPG, Ação, Puzzle, etc.)
+  - **Plataforma** (PC, PS5, Xbox, Nintendo, etc.)
+  - **Desenvolvedora** (que estúdio criou o jogo)
+- **Conta Pessoal**: Cada usuário tem sua própria biblioteca e dados protegidos
+- **Interface Amigável**: Design moderno e responsivo para usar em qualquer dispositivo
 
-## Learning Laravel
+## Tecnologias utilizadas
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- **Backend**: Laravel 11 (framework PHP moderno)
+- **Frontend**: Blade + Tailwind CSS (interface responsiva)
+- **Banco de Dados**: SQLite (configurável para MySQL, PostgreSQL, etc.)
+- **Build Tool**: Vite (bundler JavaScript rápido)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Como começar
 
-## Laravel Sponsors
+### Requisitos
+- PHP 8.2+
+- Composer
+- Node.js + npm (ou yarn)
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Instalação
 
-### Premium Partners
+1. Clone o repositório:
+```bash
+git clone https://github.com/MariCristianiRibeiro/GameVault.git
+cd GameVault
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. Instale as dependências PHP:
+```bash
+composer install
+```
 
-## Contributing
+3. Copie o arquivo de configuração:
+```bash
+cp .env.example .env
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. Gere a chave da aplicação:
+```bash
+php artisan key:generate
+```
 
-## Code of Conduct
+5. Crie o banco de dados SQLite:
+```bash
+touch database/database.sqlite
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. Execute as migrações para criar as tabelas:
+```bash
+php artisan migrate
+```
 
-## Security Vulnerabilities
+7. (Opcional) Popule com dados de teste:
+```bash
+php artisan db:seed
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+8. Instale as dependências frontend:
+```bash
+npm install
+```
 
-## License
+9. Inicie o servidor de desenvolvimento:
+```bash
+php artisan serve
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+10. Em outro terminal, compile os arquivos frontend:
+```bash
+npm run dev
+```
+
+11. Acesse a aplicação em: **http://127.0.0.1:8000**
+
+## Estrutura do Projeto
+
+```
+GameVault/
+├── app/
+│   ├── Http/Controllers/        # Controladores da aplicação
+│   └── Models/                  # Modelos (Jogo, Genero, Plataforma, etc.)
+├── database/
+│   ├── migrations/              # Definição das tabelas
+│   ├── seeders/                 # Dados iniciais para teste
+│   └── database.sqlite          # Arquivo do banco de dados
+├── resources/
+│   ├── views/                   # Templates Blade (HTML)
+│   └── css/js/                  # Estilos e scripts
+├── routes/
+│   └── web.php                  # Definição das rotas
+└── config/                      # Arquivos de configuração
+```
+
+## Como usar
+
+1. **Crie uma conta** na página inicial (clique em "Criar conta")
+2. **Faça login** com suas credenciais
+3. **Acesse o dashboard** e comece a adicionar seus jogos
+4. **Use os filtros** para encontrar rápido qualquer título
+5. **Atualize o status** de seus jogos conforme progride
+
+## Banco de Dados
+
+Os dados estão salvos em `database/database.sqlite`. Para visualizar ou gerenciar:
+
+- Use **DB Browser for SQLite** (aplicativo desktop) para explorar graficamente
+- Use o comando `sqlite3 database/database.sqlite` no terminal
+- Use **Adminer** (interface web dentro do Laravel) para gerenciar pelo navegador
+
+## Licença
+
+Este projeto está sob a licença MIT. Veja [LICENSE](LICENSE) para detalhes.
