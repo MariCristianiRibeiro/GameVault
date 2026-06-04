@@ -53,7 +53,7 @@
 
                         <div class="col-12 d-flex flex-wrap gap-3 align-items-center">
                             <button class="btn btn-brand px-4" type="submit">Entrar</button>
-                            <span class="text-secondary">Nao possui conta? <a href="{{ route('register') }}">Criar agora</a></span>
+                            <span class="text-secondary">Não possui conta? <a href="{{ route('register') }}">Criar agora</a></span>
                         </div>
                     </form>
                 </div>

@@ -78,7 +78,7 @@ class DesenvolvedoraController extends Controller
             ],
         ], [
             'nome.required' => 'Informe o nome da desenvolvedora.',
-            'nome.unique' => 'Esta desenvolvedora ja esta cadastrada.',
+            'nome.unique' => 'Esta desenvolvedora já está cadastrada.',
         ]);
     }
 }

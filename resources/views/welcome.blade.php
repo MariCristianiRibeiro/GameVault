@@ -8,10 +8,10 @@
             <div>
                 <span class="meta-chip mb-3"><i class="fa-solid fa-shield-halved"></i> Sua biblioteca</span>
                 <h1 class="display-5 fw-bold mb-3">Todos os seus jogos em um so lugar.</h1>
-                <p class="lead text-secondary mb-4">Entre, cadastre e acompanhe sua colecao do seu jeito.</p>
+                <p class="lead text-secondary mb-4">Entre, cadastre e acompanhe sua coleção do seu jeito.</p>
                 <div class="d-flex flex-wrap gap-3">
                     <a class="btn btn-brand btn-lg" href="{{ route('register') }}">Criar conta</a>
-                    <a class="btn btn-soft btn-lg" href="{{ route('login') }}">Ja tenho login</a>
+                    <a class="btn btn-soft btn-lg" href="{{ route('login') }}">Já tenho login</a>
                 </div>
             </div>
 
@@ -59,13 +59,13 @@
         <div class="col-lg-4">
             <div class="panel-card h-100">
                 <h2 class="section-title mb-3">Jogando</h2>
-                <p class="text-secondary mb-0">Veja o que esta em andamento sem perder o ritmo.</p>
+                <p class="text-secondary mb-0">Veja o que está em andamento sem perder o ritmo.</p>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="panel-card h-100">
                 <h2 class="section-title mb-3">Backlog</h2>
-                <p class="text-secondary mb-0">Separe os proximos titulos da sua fila.</p>
+                <p class="text-secondary mb-0">Separe os próximos títulos da sua fila.</p>
             </div>
         </div>
         <div class="col-lg-4">

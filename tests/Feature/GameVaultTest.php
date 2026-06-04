@@ -51,7 +51,7 @@ class GameVaultTest extends TestCase
             ->actingAs($user)
             ->post('/jogos', [
                 'titulo' => 'Elden Ring',
-                'descricao' => 'Exploracao e combate em mundo aberto.',
+                'descricao' => 'Exploração e combate em mundo aberto.',
                 'horas_jogadas' => 48,
                 'nota' => 9.5,
                 'status' => 'Jogando',

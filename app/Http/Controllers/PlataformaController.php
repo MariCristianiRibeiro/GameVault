@@ -78,7 +78,7 @@ class PlataformaController extends Controller
             ],
         ], [
             'nome.required' => 'Informe o nome da plataforma.',
-            'nome.unique' => 'Esta plataforma ja esta cadastrada.',
+            'nome.unique' => 'Esta plataforma já está cadastrada.',
         ]);
     }
 }

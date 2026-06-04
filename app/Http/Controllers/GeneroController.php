@@ -13,6 +13,7 @@ class GeneroController extends Controller
 {
     public function index(Request $request): View
     {
+        //jbjhgjhgjhk
         $busca = trim((string) $request->input('q'));
 
         $generos = Genero::query()
@@ -33,7 +34,7 @@ class GeneroController extends Controller
     {
         Genero::create($this->validar($request));
 
-        return redirect()->route('generos.index')->with('success', 'Genero cadastrado com sucesso.');
+        return redirect()->route('generos.index')->with('success', 'Gênero cadastrado com sucesso.');
     }
 
     public function edit(string $genero): View
@@ -49,7 +50,7 @@ class GeneroController extends Controller
         $generoModel = $this->findByEncryptedId(Genero::class, $genero);
         $generoModel->update($this->validar($request, $generoModel));
 
-        return redirect()->route('generos.index')->with('success', 'Genero atualizado com sucesso.');
+        return redirect()->route('generos.index')->with('success', 'Gênero atualizado com sucesso.');
     }
 
     public function destroy(string $genero): RedirectResponse
@@ -60,10 +61,10 @@ class GeneroController extends Controller
         try {
             $generoModel->delete();
 
-            return redirect()->route('generos.index')->with('success', 'Genero removido com sucesso.');
+            return redirect()->route('generos.index')->with('success', 'Gênero removido com sucesso.');
         } catch (QueryException) {
             return redirect()->route('generos.index')
-                ->with('error', 'Nao foi possivel excluir o genero porque ele esta vinculado a um jogo.');
+                ->with('error', 'Não foi possível excluir o gênero porque ele está vinculado a um jogo.');
         }
     }
 
@@ -77,8 +78,8 @@ class GeneroController extends Controller
                 Rule::unique('generos', 'nome')->ignore($genero),
             ],
         ], [
-            'nome.required' => 'Informe o nome do genero.',
-            'nome.unique' => 'Este genero ja esta cadastrado.',
+            'nome.required' => 'Informe o nome do gênero.',
+            'nome.unique' => 'Este gênero já está cadastrado.',
         ]);
     }
 }
