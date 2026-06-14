@@ -1,7 +1,9 @@
 <?php
 
+//localização
 namespace App\Http\Controllers;
 
+//importando funcionalidades
 use App\Models\Desenvolvedora;
 use App\Models\Genero;
 use App\Models\Jogo;
@@ -12,8 +14,10 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
+////jogo herdando funcionalidades de Controller
 class JogoController extends Controller
 {
+    //todos os filtros e de quem esta logado
     public function index(Request $request): View
     {
         $filtros = $this->filtros($request);
@@ -26,7 +30,8 @@ class JogoController extends Controller
             ->ordenar($filtros['ordem'])
             ->paginate(10)
             ->withQueryString();
-
+        
+            //retorno para o usuario ver o resultado
         return view('jogos.index', [
             'jogos' => $jogos,
             'filtros' => $filtros,
@@ -34,26 +39,31 @@ class JogoController extends Controller
         ]);
     }
 
+    //criando um novo jogo
     public function create(): View
     {
         return view('jogos.create', $this->opcoesRelacionamentos());
     }
 
+    //quando clicar em salvar
     public function store(Request $request): RedirectResponse
     {
         $dados = $this->validar($request);
         $dados['user_id'] = $request->user()->id;
         $dados['horas_jogadas'] = $dados['horas_jogadas'] ?? 0;
 
+        //se salvar uma imagem de capa do jogo a url
         if ($request->hasFile('imagem_arquivo')) {
             $dados['imagem_url'] = $this->salvarImagemDoArquivo($request->file('imagem_arquivo'));
         }
 
+        //jogo cadastrado
         Jogo::create($dados);
 
         return redirect()->route('jogos.index')->with('success', 'Jogo cadastrado com sucesso.');
     }
 
+    //busca por detalhes
     public function show(Request $request, string $jogo): View
     {
         $jogo = $this->buscarJogoDoUsuario($request, $jogo);
@@ -61,6 +71,7 @@ class JogoController extends Controller
         return view('jogos.show', compact('jogo'));
     }
 
+    //editar o jogo
     public function edit(Request $request, string $jogo): View
     {
         $jogo = $this->buscarJogoDoUsuario($request, $jogo);
@@ -71,12 +82,14 @@ class JogoController extends Controller
         ]);
     }
 
+    //atualiza o jogo
     public function update(Request $request, string $jogo): RedirectResponse
     {
         $jogoModel = $this->buscarJogoDoUsuario($request, $jogo);
         $dados = $this->validar($request);
         $dados['horas_jogadas'] = $dados['horas_jogadas'] ?? 0;
 
+        //se é uma capa nova
         if ($request->hasFile('imagem_arquivo')) {
             if ($jogoModel->imagem_url && str_contains($jogoModel->imagem_url, '/storage/jogos/')) {
                 $oldPath = str_replace('/storage/jogos/', '', $jogoModel->imagem_url);
@@ -85,11 +98,13 @@ class JogoController extends Controller
             $dados['imagem_url'] = $this->salvarImagemDoArquivo($request->file('imagem_arquivo'));
         }
 
+        //atualiza o jogo
         $jogoModel->update($dados);
 
         return redirect()->route('jogos.index')->with('success', 'Jogo atualizado com sucesso.');
     }
 
+    //excluir o jogo
     public function destroy(Request $request, string $jogo): RedirectResponse
     {
         $jogoModel = $this->buscarJogoDoUsuario($request, $jogo);
@@ -98,7 +113,7 @@ class JogoController extends Controller
         return redirect()->route('jogos.index')->with('success', 'Jogo removido com sucesso.');
     }
 
-    private function opcoesRelacionamentos(): array
+    //traz do banco as informações na ordem alfabética 
     {
         return [
             'plataformas' => Plataforma::query()->orderBy('nome')->get(),
@@ -108,6 +123,7 @@ class JogoController extends Controller
         ];
     }
 
+    //validações
     private function validar(Request $request): array
     {
         return $request->validate([
@@ -140,6 +156,7 @@ class JogoController extends Controller
         ]);
     }
 
+    //para tratar a imagem enviada
     private function salvarImagemDoArquivo($arquivo): ?string
     {
         if (! $arquivo) {
@@ -152,6 +169,7 @@ class JogoController extends Controller
         return '/storage/jogos/' . $filename;
     }
 
+    //organiza os filtros
     private function filtros(Request $request): array
     {
         return [
@@ -164,6 +182,7 @@ class JogoController extends Controller
         ];
     }
 
+    //segurança para buscar apenas os jogos do logado
     private function buscarJogoDoUsuario(Request $request, string $jogo): Jogo
     {
         return Jogo::query()
