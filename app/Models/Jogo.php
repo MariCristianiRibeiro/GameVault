@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-//importanto funcionalidades
+//importando funcionalidades
 use App\Models\Concerns\HasEncryptedRouteKey;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
