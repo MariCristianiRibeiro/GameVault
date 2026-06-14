@@ -2,25 +2,32 @@
 
 namespace App\Models;
 
+//importanto funcionalidades
 use App\Models\Concerns\HasEncryptedRouteKey;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+
+//jogo herdando funcionalidades de Model
 class Jogo extends Model
 {
+    //uso das importações
     use HasEncryptedRouteKey;
     use HasFactory;
 
+    //lista de opções de status
     public const STATUSS = [
         'Jogando',
         'Finalizado',
         'Backlog',
     ];
 
+    //procurar jogos na tabela no banco
     protected $table = 'jogos';
 
+    //lista de campos para preenchimento
     protected $fillable = [
         'titulo',
         'descricao',
@@ -35,7 +42,8 @@ class Jogo extends Model
         'imagem_url',
     ];
 
-    protected function casts(): array
+    //estrura as informações para o banco
+        protected function casts(): array
     {
         return [
             'data_lancamento' => 'date',
@@ -44,6 +52,7 @@ class Jogo extends Model
         ];
     }
 
+    //relaciona jogo com usuário, plataforma, gênero e desenvolvedora
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -64,6 +73,7 @@ class Jogo extends Model
         return $this->belongsTo(Desenvolvedora::class);
     }
 
+     //buscas para filtrar
     public function scopeDoUsuario(Builder $query, int $userId): Builder
     {
         return $query->where('user_id', $userId);
@@ -82,6 +92,7 @@ class Jogo extends Model
         });
     }
 
+   
     public function scopeFiltrar(Builder $query, array $filtros): Builder
     {
         return $query
@@ -91,6 +102,7 @@ class Jogo extends Model
             ->when(filled($filtros['desenvolvedora_id'] ?? null), fn (Builder $builder) => $builder->where('desenvolvedora_id', $filtros['desenvolvedora_id']));
     }
 
+    //mostrar por ordenação escolhida
     public function scopeOrdenar(Builder $query, ?string $ordem): Builder
     {
         return match ($ordem) {
